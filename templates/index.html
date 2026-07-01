@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <title> Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>📝 To-Do List</h1>
+    <form action="{{url_for('home')}}" class="input-container" method="POST"> 
+        <input type="text" placeholder="Type here..." id="input-todo" name="todo_name">
+        <button id="add-todo" type="submit">+</button>
+
+    </form>
+
+    <div class="stats-row">
+        <span>Total tasks: {{ total_task_count }}</span>
+        <span>Completed: {{ completed_task_count }}</span>
+    </div>
+
+    <div class="todo-container">
+        {% for item in items %}
+        <div class="todo {% if item.checked %}completed{% endif %}">
+            <form action="{{url_for('checkbox', todo_id=item.id) }}" class="checkbox-form" method="POST">
+                <input type="checkbox" class="todo-checkbox" {% if item.checked %}checked{% endif %} onchange="this.form.submit()">
+            </form>
+            
+            <form action="{{ url_for('edit_todo', todo_id=item.id) }}" class="edit-form" method="POST">
+                <textarea name="todo_name" rows="2" {% if item.checked %}readonly{% endif %}>{{ item.name }}</textarea>
+                <button class="edit-button" type="submit">✓</button>
+            </form>
+            <div class="action">
+                <form action="{{url_for('delete_todo', todo_id=item.id)}}" method="POST">
+                    <button class="delete-button" type="submit">🗑</button> 
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p class="empty-message">No task found</p>
+        {% endfor %}        
+    </div>
+</body>
+
+</html>
