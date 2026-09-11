@@ -2,9 +2,6 @@
 
 A containerized to-do application built in Python, with an automated CI/CD pipeline and deployment to AWS EC2.
 
-![CI](https://github.com/AbbasAli-hub/To-Do/actions/workflows/python-ci.yml/badge.svg)
-![Docker Build](https://github.com/AbbasAli-hub/To-Do/actions/workflows/docker-build.yml/badge.svg)
-
 ## Features
 
 - Create, update, and delete tasks
